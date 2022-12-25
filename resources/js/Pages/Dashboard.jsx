@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import DashboardCard from '../Components/DashboardCard';
 import { Head } from '@inertiajs/inertia-react';
 
 export default function Dashboard(props) {
@@ -14,6 +15,7 @@ export default function Dashboard(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">Welcome {props.auth.user.name}!</div>
+                        <DashboardCard />
 
                     </div>
                 </div>
