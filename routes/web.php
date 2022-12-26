@@ -34,6 +34,10 @@ Route::get('/sales', function () {
     return Inertia::render('Sales');
 })->middleware(['auth', 'verified'])->name('sales');
 
+Route::get('/inventory', function () {
+    return Inertia::render('Inventory');
+})->middleware(['auth', 'verified'])->name('inventory');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

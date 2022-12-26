@@ -12,7 +12,7 @@ export const ThemeContext = createContext( {
 });
 
 
-export default function Sales({ auth, errors, header }) {
+export default function Sales( props ) {
 
     const [cartItem , setCartItem] = useState([])
 
@@ -24,7 +24,11 @@ export default function Sales({ auth, errors, header }) {
     const menuItem = [{id:1, name: "Hamburger", price: 5.25}, {id:2, name: "Cheeseburger", price: 6.15}]
 
     return (
-        <AuthenticatedLayout auth={auth} errors={errors} header={header}>
+        <AuthenticatedLayout 
+        auth={props.auth}
+        errors={props.errors}
+        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Point of Sale</h2>}
+        >
 
             <Head title="Sales" />
             <ThemeContext.Provider value = {addItem}>
