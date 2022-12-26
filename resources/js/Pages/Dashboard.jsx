@@ -17,6 +17,7 @@ export default function Dashboard(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">Welcome {props.auth.user.name}!</div>
                         <DashboardCard />
+
                         <DashboardTable />
                     </div>
                 </div>
