@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import InventoryTable from '../Components/InventoryTable';
-import AddProductForm from '../Components/AddProductForm';
-import { Head } from '@inertiajs/inertia-react'
+import InventoryTable from './InventoryTable';
+import AddProductForm from './AddProductForm';
+import { Head, useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 
-export default function Inventory(props) {
+export default function Index(props) {
+
+
   return (
-    <AuthenticatedLayout 
+    
+    <AuthenticatedLayout
     auth={props.auth}
     errors={props.errors}
     header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Inventory Manager</h2>}
@@ -20,10 +23,10 @@ export default function Inventory(props) {
                           <input type="search" id="site-search" name='q' placeholder='Search'/>
                         </div>
                         <button className='border bg-gray-200'>
-                          Add Product
+                          Create Product
                         </button>
                         <AddProductForm />
-                        <InventoryTable />
+                        <InventoryTable products = {props.products} />
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ const defaultData = [
     code:12345,
     brand:'McDonalds',
     price:3.99,
-    units: 800,
+    quantity: 800,
     createdDate: '2021-01-01',
     action: 'Edit',
     },
@@ -21,7 +21,7 @@ const defaultData = [
     code:12345,
     brand:'McDonalds',
     price:3.99,
-    units: 800,
+    quantity: 800,
     createdDate: '2021-01-01',
     action: 'Edit',
     },
@@ -30,7 +30,7 @@ const defaultData = [
     code:12345,
     brand:'McDonalds',
     price:3.99,
-    units: 800,
+    quantity: 800,
     createdDate: '2021-01-01',
     action: 'Edit',
     },
@@ -39,7 +39,7 @@ const defaultData = [
     code:12345,
     brand:'McDonalds',
     price:3.99,
-    units: 800,
+    quantity: 800,
     createdDate: '2021-01-01',
     action: 'Edit',
     },
@@ -48,7 +48,7 @@ const defaultData = [
     code:12345,
     brand:'McDonalds',
     price:3.99,
-    units: 800,
+    quantity: 800,
     createdDate: '2021-01-01',
     action: 'Edit',
     },
@@ -79,10 +79,10 @@ columnHelper.accessor(row => row.price, {
     cell: info => <i>{info.getValue()}</i>,
     header: () => <span>Price</span>,
 }),
-columnHelper.accessor(row => row.units, {
-    id: 'units',
+columnHelper.accessor(row => row.quantity, {
+    id: 'quantity',
     cell: info => <i>{info.getValue()}</i>,
-    header: () => <span>Units</span>,
+    header: () => <span>Quantity</span>,
 }),
 columnHelper.accessor(row => row.createdDate, {
     id: 'Created Date',
@@ -98,9 +98,10 @@ columnHelper.accessor(row => row.Action, {
   
 
 
-export default function InventoryTable() {
+export default function InventoryTable({products}) {
 
-    const [data, setData] = useState(() => [...defaultData])
+    const [data, setData] = useState(() => [...products])
+
 
     const table = useReactTable({
         data,
@@ -111,6 +112,7 @@ export default function InventoryTable() {
     
   return (
     <div className="flex justify-center p-2">
+        {console.log(products)}
         <table className='w-full'>
         <thead className='text-left'>
             {table.getHeaderGroups().map(headerGroup => (
