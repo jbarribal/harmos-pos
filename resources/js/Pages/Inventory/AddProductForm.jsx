@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/inertia-react';
 export default function AddProductForm() {
 
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, patch, processing, errors, reset } = useForm({
         name: '',
         code: '',
         brand: '',
@@ -13,22 +13,16 @@ export default function AddProductForm() {
     });
     
     const submit = (e) => {
-    e.preventDefault()
-    post('/inventory', {
-        preserveScroll: true,
-        onSuccess: () => {
-            setData('name', '')
-            setData('code', '')
-            setData('brand', '')
-            setData('price', '')
-            setData('quantity', '')
-        }
-    })
+        e.preventDefault();
+        post(route('inventory.store'), {
+            preserveState:false 
+        });
     }
   return (
 
+
     <form 
-        className='grid lg:grid-cols-2 w-4/6 gap-4'
+        className='grid lg:grid-cols-3 w-5/6 gap-4'
         onSubmit={submit}
     >
         <div className='input-type'>
@@ -46,7 +40,7 @@ export default function AddProductForm() {
         <div className='input-type'>
             <input className='border w-full px-5 py-3 focus:outline' value={data.quantity} onChange={e => setData('quantity', e.target.value)} type='number' name = 'quantity' placeholder='Quantity' />
         </div>
-        <button className='flex justify-center text-md w-2/6 bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500'>
+        <button processing= {processing} className='flex justify-center text-md w-3/6 bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500'>
             Add Product
         </button>
     </form> 

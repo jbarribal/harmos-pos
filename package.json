@@ -22,7 +22,9 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^1.9.1",
+        "@tanstack/react-table": "^8.7.4",
         "react-icons": "^4.7.1",
-        "@tanstack/react-table": "^8.7.4"
+        "react-redux": "^8.0.5"
     }
 }
