@@ -4,7 +4,7 @@ import Form from './Form';
 import UpdateProductForm from './UpdateProductForm';
 import { Head } from '@inertiajs/inertia-react'
 import React, { useState } from 'react'
-import { store } from './redux/store'
+import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 
 

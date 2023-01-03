@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     form : false,
     product : {
-        name: "123",
+        name: "",
         code: "",
         brand: "",
         price: "",

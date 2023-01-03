@@ -2,7 +2,7 @@ import React, {useState, useContext, useReducer} from 'react'
 import { Link } from '@inertiajs/inertia-react'
 import {HiOutlineTrash} from 'react-icons/hi'
 import {FiEdit} from 'react-icons/fi'
-import { toggleForm } from './redux/reducer'
+import { toggleForm } from '../redux/reducer'
 import {
     createColumnHelper,
     flexRender,
