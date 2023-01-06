@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 
 
@@ -7,7 +7,14 @@ export const SalesSlice = createSlice({
     initialState: [],
     reducers: {
         addCart: (state, action) => {
-            state.push(action.payload)
+            if(current(state).some((item) => item.id == action.payload.id)){
+                SalesSlice.caseReducers.incQty(state, action)
+            }
+            else {
+                state.push(action.payload)
+            }
+            
+            
         },
         incQty: (state, action) => {
             state.map((item) => {
@@ -33,7 +40,8 @@ export const SalesSlice = createSlice({
                     state.splice(index, 1)
                 }
             })
-        }
+        },
+        
     }
 })
 
