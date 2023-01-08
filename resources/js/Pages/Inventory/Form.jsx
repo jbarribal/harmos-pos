@@ -12,6 +12,8 @@ export default function Form() {
   const { form } = useSelector(state => state.form)
   return (
     <>
+    {/* <UpdateProductForm /> */}
+    {/* <AddProductForm /> */}
     {form ? <UpdateProductForm /> : <AddProductForm />}
     </>
   )

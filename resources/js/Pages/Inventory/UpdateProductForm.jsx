@@ -9,15 +9,14 @@ export default function UpdateProductForm() {
     const { product } = useSelector(state => state.form)
     const { data, setData, patch, processing, errors, reset, reload } = useForm({
         name: product.name,
-        code: product.code,
-        brand: product.brand,
+        category: product.category,
         price: product.price,
-        quantity:product.quantity,
+        quantity:product.units,
     });
     
     const submit = () => {
         patch(route('inventory.update',product.id), {
-            preserveState:false
+            preserveState:false,
         })
         };
 
@@ -27,27 +26,39 @@ export default function UpdateProductForm() {
 
 
     <form 
-        className='grid lg:grid-cols-3 w-5/6 gap-4'
+        className='grid grid-cols-8 gap-2 mx-2'
         onSubmit={submit}
     >
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' defaultValue={product.name} onChange={e => setData('name', e.target.value)} type='text'  name = 'itemName' placeholder='Item Name' />
+        <div className='col-span-3'>
+            <label className="block text-sm font-medium text-gray-700">Product Name</label>
+            <input type="text" name="name" defaultValue={product.name} onChange={e => setData('name', e.target.value)} 
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' defaultValue={product.code} onChange={e => setData('code', e.target.value)} type='text' name = 'code' placeholder='Code / SKU' />
+        <div className='col-span-2'>
+            <label className="block text-sm font-medium text-gray-700">Category</label>
+            <select name="category" defaultValue={product.category} onChange={e => setData('category', e.target.value)}
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                <option>Main</option>
+                <option>Side</option>
+                <option>Drink</option>
+                <option>Desert</option>
+            </select>
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' defaultValue={product.brand} onChange={e => setData('brand', e.target.value)} type='text' name = 'brand' placeholder='Brand' />
+        <div>
+            <label className="block text-sm font-medium text-gray-700">Price</label>
+            <input type="number" name="price" defaultValue={product.price} onChange={e => setData('price', e.target.value)} 
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' defaultValue={product.price} onChange={e => setData('price', e.target.value)} type='number' name = 'price' placeholder='Price' />
+        <div>
+            <label className="block text-sm font-medium text-gray-700">Quantity</label>
+            <input type="number" name="units" defaultValue={product.units} onChange={e => setData('units', e.target.value)} 
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' defaultValue={product.quantity} onChange={e => setData('quantity', e.target.value)} type='number' name = 'quantity' placeholder='Quantity' />
-        </div>
-        <button processing= {processing} className='flex justify-center text-md w-3/6 bg-orange-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500'>
-            Update Product
+        <div className='relative'>
+        <button processing= {processing} className='absolute bottom-0 left-0 w-full h-2/3 text-md bg-orange-500 text-white border rounded-md hover:bg-gray-50 hover:border-orange-500 hover:text-orange-500'>
+            Update
         </button>
+        </div>
     </form> 
   )
 }

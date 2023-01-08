@@ -27,12 +27,7 @@ export default function Index(props) {
                   <div>
                     <input type="search" id="site-search" name='q' placeholder='Search'/>
                   </div>
-                  <button className='border bg-gray-200'>
-                    Create Product
-                  </button>
                   <Provider store = {store}>
-                    {/* <AddProductForm /> */}
-                    {/* <UpdateProductForm /> */}
                     <Form />
                     <InventoryTable products = {props.products} />
                   </Provider>

@@ -23,25 +23,20 @@ export default function InventoryTable({products}) {
             cell: info => <i>{info.getValue()}</i>,
             header: () => <span>Name</span>,
         }),
-        columnHelper.accessor(row => row.code, {
-            id: 'code',
+        columnHelper.accessor(row => row.category, {
+            id: 'category',
             cell: info => <i>{info.getValue()}</i>,
-            header: () => <span>Code</span>,
-        }),
-        columnHelper.accessor(row => row.brand, {
-            id: 'brand',
-            cell: info => <i>{info.getValue()}</i>,
-            header: () => <span>Brand</span>,
+            header: () => <span>Category</span>,
         }),
         columnHelper.accessor(row => row.price, {
             id: 'price',
             cell: info => <i>{info.getValue()}</i>,
             header: () => <span>Price</span>,
         }),
-        columnHelper.accessor(row => row.quantity, {
-            id: 'quantity',
+        columnHelper.accessor(row => row.units, {
+            id: 'units',
             cell: info => <i>{info.getValue()}</i>,
-            header: () => <span>Quantity</span>,
+            header: () => <span>Units</span>,
         }),
         columnHelper.accessor(row => row.created_at, {
             id: 'created_at',

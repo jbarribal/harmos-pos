@@ -21,8 +21,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
 
-        Product::find($id)->delete();
-        return Redirect::route('inventory.index');
+        Product::find($id)
+            ->delete();
+//        return Redirect::route('inventory.index');
 
     }
 
@@ -31,28 +32,28 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'code' => 'required',
-            'brand' => 'required|max:255',
+            'category' => 'required',
             'price' => 'required|numeric',
-            'quantity' => 'required|numeric'
+            'units' => 'required|numeric'
         ]);
 
         Product::create($request->all());
         //return redirect()->action([ProductController::class, 'index']);
-        return redirect()->route('inventory.index');
+//        return redirect()->route('inventory.index');
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|max:255',
-            'code' => 'required',
-            'brand' => 'required|max:255',
+            'category' => 'required',
             'price' => 'required|numeric',
-            'quantity' => 'required|numeric'
+            'units' => 'required|numeric'
         ]);
 
-        Product::find($id)->update($request->all());
-        return redirect()->route('inventory.index');
+        Product::find($id)
+            ->update($request->all());
+//        return redirect()->route('inventory.index');
+//        return Redirect::route('inventory.index');
     }
 }

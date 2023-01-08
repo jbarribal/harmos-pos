@@ -6,43 +6,66 @@ export default function AddProductForm() {
 
     const { data, setData, post, patch, processing, errors, reset } = useForm({
         name: '',
-        code: '',
-        brand: '',
+        category: '',
         price: '',
-        quantity: '',
+        units: '',
     });
     
     const submit = (e) => {
         e.preventDefault();
         post(route('inventory.store'), {
-            preserveState:false 
+            preserveState:false,
         });
     }
+
+    const handleChange = (e) => {
+        setData(e.target.name, e.target.value)
+    }
+
+
   return (
 
 
     <form 
-        className='grid lg:grid-cols-3 w-5/6 gap-4'
+        className='grid grid-cols-8 gap-2 mx-2'
         onSubmit={submit}
-    >
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' value = {data.name} onChange={e => setData('name', e.target.value)} type='text'  name = 'itemName' placeholder='Item Name' />
+    >   
+        
+        <div className='col-span-3'>
+            <label className="block text-sm font-medium text-gray-700">Product Name</label>
+            <input type="text" name="name" value = {data.name} onChange={handleChange}  
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' value = {data.code} onChange={e => setData('code', e.target.value)} type='text' name = 'code' placeholder='Code / SKU' />
+        <div className='col-span-2'>
+            <label className="block text-sm font-medium text-gray-700">Category</label>
+            <select name="category" value = {data.category} onChange={handleChange}
+                required
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                <option></option>
+                <option>Main</option>
+                <option>Side</option>
+                <option>Drink</option>
+                <option>Desert</option>
+            </select>
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' value  = {data.brand} onChange={e => setData('brand', e.target.value)} type='text' name = 'brand' placeholder='Brand' />
+        <div>
+            <label className="block text-sm font-medium text-gray-700">Price</label>
+            <input type="number" name="price" value = {data.price} onChange={handleChange} 
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' value = {data.price} onChange={e => setData('price', e.target.value)} type='number' name = 'price' placeholder='Price' />
+        <div>
+            <label className="block text-sm font-medium text-gray-700">Quantity</label>
+            <input type="number" name="units" value = {data.units} onChange={handleChange} 
+                required
+                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
-        <div className='input-type'>
-            <input className='border w-full px-5 py-3 focus:outline' value={data.quantity} onChange={e => setData('quantity', e.target.value)} type='number' name = 'quantity' placeholder='Quantity' />
-        </div>
-        <button processing= {processing} className='flex justify-center text-md w-3/6 bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500'>
-            Add Product
+        <div className='relative'>
+        <button disabled = {processing }className='absolute bottom-0 left-0 w-full h-2/3 text-md bg-green-500 text-white border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500'>
+            Add
         </button>
+        </div>
     </form> 
   )
 }
