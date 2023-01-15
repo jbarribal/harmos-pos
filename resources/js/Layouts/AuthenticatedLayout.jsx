@@ -3,6 +3,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import Sidebar from '@/Components/Sidebar';
 import { Link } from '@inertiajs/inertia-react';
 
 export default function Authenticated({ auth, header, children }) {
@@ -11,16 +12,20 @@ export default function Authenticated({ auth, header, children }) {
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
+                <Sidebar />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center">
+
+
+                            {/* logo */}
+                            {/* <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            </div> */}
+                            {/* links */}
+                            {/* <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
@@ -30,9 +35,9 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('inventory.index')} active={route().current('inventory.index')}>
                                     Inventory
                                 </NavLink>
-                            </div>
-                        </div>
-
+                            </div> */}
+                        </div> 
+                        {/* profile dropdown */}
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
                                 <Dropdown>
@@ -94,8 +99,8 @@ export default function Authenticated({ auth, header, children }) {
                             </button>
                         </div>
                     </div>
-                </div>
-
+                </div>  
+                {/* hamburger icon and dropdown menu */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -121,6 +126,8 @@ export default function Authenticated({ auth, header, children }) {
                 </div>
             </nav>
 
+
+            {/* header */}
             {header && (
                 <header className="bg-white shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>

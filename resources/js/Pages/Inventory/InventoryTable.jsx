@@ -1,4 +1,5 @@
 import React, {useState, useContext, useReducer} from 'react'
+import Pagination from './Pagination'
 import { Link } from '@inertiajs/inertia-react'
 import {HiOutlineTrash} from 'react-icons/hi'
 import {FiEdit} from 'react-icons/fi'
@@ -8,6 +9,7 @@ import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
+    getPaginationRowModel,
     useReactTable,
   } from '@tanstack/react-table'
 import { useDispatch } from 'react-redux'
@@ -59,42 +61,47 @@ export default function InventoryTable({products}) {
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
       })
 
 
   return (
-    <div className="flex justify-center p-2">
-
-        <table className='w-full'>
-        <thead className='text-left'>
-            {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                <th key={header.id}>
-                    {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                        )}
-                </th>
+    <div>
+        <div className="flex justify-center p-2">
+            <table className='min-w-full divide-y divide-gray-300'>
+            <thead className='bg-gray-50 text-left'>
+                {table.getHeaderGroups().map(headerGroup => (
+                <tr key={headerGroup.id}>
+                    {headerGroup.headers.map(header => (
+                    <th className = 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6' key={header.id}>
+                        {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                            )}
+                    </th>
+                    ))}
+                </tr>
                 ))}
-            </tr>
-            ))}
-        </thead>
-        <tbody>
-            {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-                {row.getVisibleCells().map(cell => (
-                <td className= 'text-justify' key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+            </thead>
+            <tbody className='bg-white'>
+                {table.getRowModel().rows.map((row,index) => (
+                <tr key={row.id} className={index % 2 === 0 ? undefined : 'bg-gray-50'}>
+                    {row.getVisibleCells().map(cell => (
+                    <td className= 'whitespace-nowrap px-3 py-4 text-sm text-gray-900' key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                    ))}
+                </tr>
                 ))}
-            </tr>
-            ))}
-        </tbody>
-        </table>
+            </tbody>
+            </table>
 
+        </div>
+        <Pagination />
     </div>
+    
+
   )
 }
