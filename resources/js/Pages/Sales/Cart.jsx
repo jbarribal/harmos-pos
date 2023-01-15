@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incQty,decQty,removeCart } from './salesSlice';
-import { toggleModal } from './checkoutSlice';
+import { toggleModal, setTotal, setUserId, setItems } from './checkoutSlice';
 import { HiOutlineTrash } from 'react-icons/hi';
 
-export default function Cart () {
+export default function Cart ({user}) {
   const dispatch = useDispatch()
   const cartItem = useSelector(state => state.sales)
-  const [totalCost, setTotalCost] = useState(0);
+  const { transaction } = useSelector(state => state.checkout)
 
   useEffect(() => {
     let total = 0;
     cartItem.forEach(item => {
       total += item.price * item.quantity
     });
-    setTotalCost(total.toFixed(2));
+    dispatch(setTotal(total.toFixed(2)))
   }, [cartItem]);
+
+  function handleCheckout () {
+    dispatch(setItems(cartItem))
+    dispatch(setUserId(user.id))
+    dispatch(toggleModal())
+  }
 
 
   return (
@@ -54,10 +60,10 @@ export default function Cart () {
           </li>
         ))}
       </ul>
-      <p>Total: ${totalCost}</p>
+      <p>Total: ${transaction.total}</p>
       <button 
         className='bg-blue-500 enabled:hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full disabled:opacity-50'
-         onClick={() => dispatch(toggleModal())}
+         onClick={() => handleCheckout()}
          disabled = {cartItem.length === 0}
         >
           Checkout

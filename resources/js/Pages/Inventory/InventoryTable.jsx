@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/inertia-react'
 import {HiOutlineTrash} from 'react-icons/hi'
 import {FiEdit} from 'react-icons/fi'
 import { toggleForm } from '../redux/reducer'
+import  moment  from 'moment'
 import {
     createColumnHelper,
     flexRender,
@@ -40,7 +41,7 @@ export default function InventoryTable({products}) {
         }),
         columnHelper.accessor(row => row.created_at, {
             id: 'created_at',
-            cell: info => <i>{info.getValue()}</i>,
+            cell: info => <i>{moment(info.getValue()).format('ll')}</i>,
             header: () => <span>Created Date</span>,
         }),
         columnHelper.accessor(row => row.id, {
@@ -63,6 +64,7 @@ export default function InventoryTable({products}) {
 
   return (
     <div className="flex justify-center p-2">
+
         <table className='w-full'>
         <thead className='text-left'>
             {table.getHeaderGroups().map(headerGroup => (

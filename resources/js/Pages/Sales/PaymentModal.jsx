@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CreditCardIcon } from '@heroicons/react/24/outline'
+import { Inertia } from '@inertiajs/inertia'
 import { toggleModal } from './checkoutSlice'
 import List from './List'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,9 +9,14 @@ import { useDispatch, useSelector } from 'react-redux'
 export default function Example() {
 
 
-  const { modal } = useSelector(state => state.checkout)
+  const { modal, transaction } = useSelector(state => state.checkout)
   const cancelButtonRef = useRef(null)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() 
+
+  function handleCheckout() {
+    Inertia.post(route('sales.store'), transaction)
+    dispatch(toggleModal())
+  }
 
 
   return (
@@ -59,7 +65,7 @@ export default function Example() {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => dispatch(toggleModal())}
+                    onClick={() => handleCheckout()}
                   >
                     Checkout
                   </button>

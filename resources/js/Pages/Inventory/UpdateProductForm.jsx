@@ -11,7 +11,7 @@ export default function UpdateProductForm() {
         name: product.name,
         category: product.category,
         price: product.price,
-        quantity:product.units,
+        units:product.units,
     });
     
     const submit = () => {
@@ -46,12 +46,12 @@ export default function UpdateProductForm() {
         </div>
         <div>
             <label className="block text-sm font-medium text-gray-700">Price</label>
-            <input type="number" name="price" defaultValue={product.price} onChange={e => setData('price', e.target.value)} 
+            <input type="text" name="price" defaultValue={product.price} onChange={e => setData('price', e.target.value)} 
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div>
             <label className="block text-sm font-medium text-gray-700">Quantity</label>
-            <input type="number" name="units" defaultValue={product.units} onChange={e => setData('units', e.target.value)} 
+            <input type="text" name="units" defaultValue={product.units} onChange={e => setData('units', e.target.value)} 
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div className='relative'>

@@ -9,17 +9,35 @@ function classNames(...classes) {
   }
   
 
-export default function ItemGrid({items}) {
+export default function ItemGrid({products}) {
 
-    const dispatch = useDispatch()
-    const categories = ['Main', 'Side', 'Drink', 'Dessert']
 
-    return (
+  let productsData = []
+  products.forEach(product => {
+    if (!productsData[product.category]) {
+        productsData[product.category] = []
+    }
+    productsData[product.category].push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        units: product.units,
+        quantity: 1
+    })
+  });
+
+
+
+  const dispatch = useDispatch()
+
+
+    
+    return (  
 
     <div className="w-full px-2">
       <Tab.Group>
         <Tab.List className="flex overflow-hidden rounded-xl border border-gray-100 bg-gray-50 p-1">
-          {categories.map((category) => (
+          {Object.keys(productsData).map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
@@ -37,9 +55,15 @@ export default function ItemGrid({items}) {
           ))}
         </Tab.List>
         <Tab.Panels className="mt-4">
-        <div className='grid grid-cols-3 gap-4'>
-                {items.map((item, index) => (
-                    <button key={index} onClick={() => dispatch(addCart(item))}>
+          {Object.values(productsData).map((product, idx) => (
+              <Tab.Panel
+              key={idx}
+              className={classNames(
+                'grid grid-cols-3 gap-4',
+              )}
+            >
+              {product.map((item, index) => (
+                  <button key={index} onClick={() => dispatch(addCart(item))}>
                     <div  className="bg-white hover:bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col justify-between leading-normal hob">
                         <div className = "text-center text-gray-900 font-bold text-xl mb-2 pt-2">
                             {item.name}
@@ -48,10 +72,10 @@ export default function ItemGrid({items}) {
                             ${item.price}
                         </div>
                     </div>
-                    </button>
+                  </button>
                 ))}
-
-        </div>
+              </Tab.Panel>
+          ))}
         </Tab.Panels>
 
       </Tab.Group>

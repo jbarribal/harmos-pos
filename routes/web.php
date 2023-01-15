@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionsController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,9 +36,14 @@ Route::get('/dashboard', function () {
 Route::resource('inventory', ProductController::class)
     ->middleware(['auth', 'verified']);
 
+Route::resource('sales', App\Http\Controllers\TransactionsController::class)
+    ->only(['store'])
+    ->middleware(['auth', 'verified']);
+
 Route::get('/sales', function () {
-    // Only verified users may access this route...
-    return Inertia::render('Sales/Index');
+    return Inertia::render('Sales/Index', [
+        'products' => Product::all()
+    ]);
 })->middleware(['auth', 'verified'])->name('sales');
 
 

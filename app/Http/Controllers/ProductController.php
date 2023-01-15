@@ -18,6 +18,12 @@ class ProductController extends Controller
         ]);
     }
 
+    public function show($id){
+
+
+        return response()->json(Product::find($id));
+    }
+
     public function destroy($id)
     {
 
@@ -44,16 +50,18 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'units' => 'required|numeric'
-        ]);
+//        $request->validate([
+//            'name' => 'required|max:255',
+//            'category' => 'required',
+//            'price' => 'required|numeric',
+//            'units' => 'required|numeric'
+//        ]);
 
         Product::find($id)
             ->update($request->all());
 //        return redirect()->route('inventory.index');
 //        return Redirect::route('inventory.index');
+
+        return response()->json($request->all());
     }
 }
